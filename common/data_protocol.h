@@ -28,5 +28,7 @@ t == CLIENT_SAC_APPLY_TICKET || t == CLIENT_AC_TGT) return true;\else return fal
 #define is_ac_type(t) bool check(short t){ if(t == AC_REPLY_ERROR || \
 t == AC_REPLY_TICKET || t == AC_REPLY_TGT || t == AC_REPLY_SAC) return true; \ else return false;}
 
+#define is_avalid_len(t) bool check(short t){ return (t > 0 && t < 1024*4);}
+#define is_avalid_type(t) bool check(short t){ return (t > 0 && t < 65535);}
 
 #endif //LS_DATA_PROTOCOL_H_

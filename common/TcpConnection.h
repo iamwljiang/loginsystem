@@ -1,7 +1,6 @@
 #ifndef LS_TCPCONNECTION_H_
 #define LS_TCPCONNECTION_H_
 
-#include <iostream>
 #include <string>
 
 #include <boost/asio.hpp>
@@ -28,9 +27,20 @@ public:
 	boost::asio::ip::tcp::socket& Socket();	
 
 protected:
-	virtual void handle_read (boost::system::error& e,std::size_t bytes_transferred);
+	void handle_read_header (boost::system::error& e,std::size_t bytes_transferred,char *header);
 
-	virtual void handle_write(boost::system::error& e,std::size_t bytes_transferred);
+	void handle_read_content (boost::system::error& e,std::size_t bytes_transferred);
+
+	void handle_write(boost::system::error& e,std::size_t bytes_transferred);
+
+	//in real service you can rewrite this method
+	/*
+	*return <0,packet process error;=0,suceess
+	*@param 'packet' real transfer content
+	*@param 'type'   type of this packet
+	*@param 'len'    len  of this packet
+	*/
+	virtual int ProcessPacket(const char* packet,short type,short len) = 0;
 
 protected:
 	boost::asio::io_service 		_io_service;
@@ -40,6 +50,14 @@ protected:
 	boost::asio::ip::tcp::socket    _socket;
 
 	CConnectionManager& 			_connection_manager;	
+
+	short							_content_buf_len;
+
+	short							_packet_len;
+
+	short 							_packet_type;
+
+	boost::shared_array<char>       _packet_content;	
 };
 
 #endif //LS_TCPCONNECTION_H_

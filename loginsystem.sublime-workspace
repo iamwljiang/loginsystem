@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"pro",
+				"protected"
+			],
+			[
+				"_packet",
+				"_packet_len"
+			],
+			[
+				"_pace",
+				"_packet_len"
+			],
+			[
+				"packet",
+				"_packet_content"
+			],
+			[
+				"_pa",
+				"_packet_len"
+			],
+			[
+				"conn",
+				"connections"
+			],
+			[
+				"m",
+				"_connection_manager"
+			],
+			[
 				"AC_RE",
 				"AC_REPLY_SAC"
 			],
@@ -36,50 +64,10 @@
 	"buffers":
 	[
 		{
-			"file": "common/TcpServer.h",
+			"file": "src/auth/ACConnection.h",
 			"settings":
 			{
-				"buffer_size": 1288,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "common/data_type.h",
-			"settings":
-			{
-				"buffer_size": 222,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "common/ConnectionManager.h",
-			"settings":
-			{
-				"buffer_size": 577,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "common/TcpConnection.h",
-			"settings":
-			{
-				"buffer_size": 1069,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "common/EnAndDecryption.h",
-			"settings":
-			{
-				"buffer_size": 393,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "common/RequestParser.h",
-			"settings":
-			{
-				"buffer_size": 616,
+				"buffer_size": 447,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,39 +75,15 @@
 			"file": "common/data_protocol.h",
 			"settings":
 			{
-				"buffer_size": 818,
+				"buffer_size": 972,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "common/CEncryptAndDecrypt.h",
 			"settings":
 			{
-				"buffer_size": 460,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/auth/ACConnection.h",
-			"settings":
-			{
-				"buffer_size": 23,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/auth/ACConnection.cpp",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/auth/UserTable.cpp",
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 393,
 				"line_ending": "Windows"
 			}
 		},
@@ -127,17 +91,8 @@
 			"file": "src/auth/CAuthenticationCenter.h",
 			"settings":
 			{
-				"buffer_size": 7,
+				"buffer_size": 226,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/auth/UserTable.h",
-			"settings":
-			{
-				"buffer_size": 691,
-				"line_ending": "Windows",
-				"name": "#ifndef LS_USERTABLE_H_"
 			}
 		}
 	],
@@ -165,11 +120,26 @@
 	},
 	"file_history":
 	[
+		"/E/Company/self/loginsystem/common/TcpConnection.h",
+		"/E/Company/self/loginsystem/common/TcpConnection.cpp",
+		"/E/Company/self/loginsystem/common/EnAndDecryption.cpp",
+		"/E/Company/self/loginsystem/common/data_protocol.h",
+		"/E/Company/self/loginsystem/common/TcpServer.cpp",
+		"/E/Company/self/loginsystem/common/ConnectionManager.cpp",
+		"/E/Company/self/loginsystem/common/ConnectionManager.h",
+		"/E/Company/self/loginsystem/common/TcpServer.h",
+		"/E/Company/self/loginsystem/common/EnAndDecryption.h",
+		"/E/Company/self/loginsystem/common/RequestParser.h",
+		"/E/Company/self/loginsystem/src/auth/ACConnection.h",
+		"/E/Company/self/loginsystem/src/auth/ACConnection.cpp",
+		"/E/Company/self/loginsystem/src/auth/UserTable.cpp",
+		"/E/Company/self/loginsystem/src/auth/CAuthenticationCenter.h",
+		"/E/Company/self/loginsystem/src/auth/UserTable.h",
+		"/E/Company/self/loginsystem/common/data_type.h",
+		"/E/Company/self/loginsystem/README.md",
 		"/E/Company/self/loginsystem/TODO",
 		"/E/Company/self/loginsystem/common/RequestParser.cpp",
-		"/E/Company/self/loginsystem/common/ConnectionManager.cpp",
 		"/E/Company/self/loginsystem/common/TcpSession.h",
-		"/E/Company/self/loginsystem/src/auth/CAuthenticationCenter.h",
 		"/E/Company/self/loginsystem/common/CTcpConnection.cpp",
 		"/E/Company/self/loginsystem/common/CTcpConnection.h",
 		"/E/Company/self/loginsystem/common/CTcpSession.h",
@@ -183,7 +153,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -214,50 +184,49 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "common/TcpServer.h",
+					"file": "src/auth/ACConnection.h",
 					"settings":
 					{
-						"buffer_size": 1288,
+						"buffer_size": 447,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								721,
-								721
+								413,
+								413
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 344.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "common/data_type.h",
+					"file": "common/data_protocol.h",
 					"settings":
 					{
-						"buffer_size": 222,
+						"buffer_size": 972,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								74,
-								74
+								187,
+								187
 							]
 						],
 						"settings":
@@ -272,18 +241,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "common/ConnectionManager.h",
+					"file": "common/CEncryptAndDecrypt.h",
 					"settings":
 					{
-						"buffer_size": 577,
+						"buffer_size": 393,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								288,
-								288
+								183,
+								201
 							]
 						],
 						"settings":
@@ -298,259 +267,22 @@
 				},
 				{
 					"buffer": 3,
-					"file": "common/TcpConnection.h",
-					"settings":
-					{
-						"buffer_size": 1069,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								861,
-								861
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 90.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "common/EnAndDecryption.h",
-					"settings":
-					{
-						"buffer_size": 393,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								233,
-								292
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "common/RequestParser.h",
-					"settings":
-					{
-						"buffer_size": 616,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								421,
-								421
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "common/data_protocol.h",
-					"settings":
-					{
-						"buffer_size": 818,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								178,
-								178
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "README.md",
-					"settings":
-					{
-						"buffer_size": 460,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								413,
-								413
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/auth/ACConnection.h",
-					"settings":
-					{
-						"buffer_size": 23,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23,
-								23
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "src/auth/ACConnection.cpp",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "src/auth/UserTable.cpp",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
 					"file": "src/auth/CAuthenticationCenter.h",
 					"settings":
 					{
-						"buffer_size": 7,
+						"buffer_size": 226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7,
-								7
+								6,
+								6
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "src/auth/UserTable.h",
-					"settings":
-					{
-						"buffer_size": 691,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								691,
-								691
-							]
-						],
-						"settings":
-						{
-							"auto_name": "#ifndef LS_USERTABLE_H_",
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,

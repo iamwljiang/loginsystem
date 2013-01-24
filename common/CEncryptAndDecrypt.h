@@ -17,6 +17,11 @@ public:
 
 	char* DESDecrpyt(const char* data,int len,const char* key);  
 
+	char* Md5FromString(const char* buffer,int len, char* dist);
+
+	char* Md5FromString(const char* buffer1,int len1,const char* buffer2,int len2,char* dist);
+
+	char* Md5FromFile(const char* filename, char* dist);
 };
 
 #endif //LS_ENANDDECRYPTION_H_

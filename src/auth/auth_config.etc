@@ -1,0 +1,7 @@
+#authentication config file
+listen_ip   = 0.0.0.0
+
+listen_port = 3390
+
+
+

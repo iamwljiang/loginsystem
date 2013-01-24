@@ -36,21 +36,30 @@ int CTcpServer::Init()
 
 int CTcpServer::Run()
 {
-	start_accept();
+	if(_alloc_connection_func == NULL)
+		return -1;
+
+	if(start_accept() < 0)
+		return -2;
+	
+	start_thread();
 	return 0;
 }
 
 int CTcpServer::start_accept()
 {
-	if(alloc_connection_func == NULL)
-		_new_connection.reset(new CTcpConnectoin(_io_service,_connection_manager));
-	else
-		_new_connection.reset(_alloc_connection_func(_io_service,_connection_manager));
+	//if(alloc_connection_func == NULL)
+	//	_new_connection.reset(new CTcpConnectoin(_io_service,_connection_manager));
+	//else
+	try{
+	_new_connection.reset(_alloc_connection_func(_io_service,_connection_manager));
 	
 	_acceptor.async_accept(_new_connection->Socket(),
 		_strand.wrap(boost::bind(&CTcpServer::handle_accept,enable_shared_from_this(),
 			boost::asio::placeholders::error)));
-
+	}catch(std::exception& e){
+		return -1;
+	}
 	return 0;
 }
 

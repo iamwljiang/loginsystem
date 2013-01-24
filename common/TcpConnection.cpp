@@ -36,12 +36,12 @@ boost::asio::ip::tcp::socket&  CTcpConnection::Socket()
 void CTcpConnection::handle_read_header (boost::system::error& e,std::size_t bytes_transferred,char *header)
 {
 	if(bytes_transferred != 4){
-		_manager.Stop(enable_shared_from_this());
+		_manager.Stop(boost::shared_from_this());
 		return;
 	}
 
 	if(!e){
-		_manager.Stop(enable_shared_from_this());
+		_manager.Stop(boost::shared_from_this());
 		return;	
 	}
 
@@ -62,20 +62,40 @@ void CTcpConnection::handle_read_header (boost::system::error& e,std::size_t byt
 void CTcpConnection::handle_read_content (boost::system::error& e,std::size_t bytes_transferred)
 {
 	if(!e){
-		_manager.Stop(enable_shared_from_this());
+		_manager.Stop(boost::shared_from_this());
 		return;
 	}
 
 	int ret = ProcessPacket(_packet_content.get(),_packet_type,_packet_len);
 	if(ret == 0){
 		Start();
+	}else{
+		_manager.Stop(boost::shared_from_this());
 	}
 }
 
 void CTcpConnection::handle_write(boost::system::error& e,std::size_t bytes_transferred)
 {
 	if(!e){
-		_manager.Stop(enable_shared_from_this());
+		_manager.Stop(boost::shared_from_this());
 		return;
 	}
+}
+void ReplySyncMessage(const char* data, int data_len)
+{
+	_strand.dispatch(boost::asio::write(_socket,boost::asio::buffer(data,data_len)));
+}
+
+void CTcpConnection::PostAsyncMessage(const char* data, int data_len)
+{
+	_strand.post(boost::bind(
+		&CTcpConnection::ReplyAsyncMessage,
+		this,data,data_len));
+}
+
+void CTcpConnection::ReplyAsyncMessage(const char* data, int data_len)
+{
+	boost::asio::async_write(_socket,boost::asio::buffer(data,data_len),
+		_strand.wrap(boost::bind(&CTcpConnection::handle_write,this,
+			boost::asio::placeholders::error));
 }

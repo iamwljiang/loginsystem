@@ -26,6 +26,15 @@ public:
 
 	boost::asio::ip::tcp::socket& Socket();	
 
+	//wrap
+	void ReplySyncMessage(const char* data, int data_len);
+	
+	//post
+	void PostAsyncMessage(const char* data, int data_len);
+
+	//wrap
+	void ReplyAsyncMessage(const char* data, int data_len);
+
 protected:
 	void handle_read_header (boost::system::error& e,std::size_t bytes_transferred,char *header);
 
@@ -40,7 +49,7 @@ protected:
 	*@param 'type'   type of this packet
 	*@param 'len'    len  of this packet
 	*/
-	virtual int ProcessPacket(const char* packet,short type,short len) = 0;
+	virtual int ProcessPacket(const char* packet,short len,short type) = 0;
 
 protected:
 	boost::asio::io_service 		_io_service;

@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"rand",
+				"rand_str"
+			],
+			[
+				"CA",
+				"CAuthenticationCenter"
+			],
+			[
+				"Get",
+				"GetAuthCenterKey"
+			],
+			[
+				"user",
+				"user_node"
+			],
+			[
+				"shared_",
+				"shared_from_this"
+			],
+			[
+				"Process",
+				"ProcessErrorMessage"
+			],
+			[
+				"_",
+				"_count_verify"
+			],
+			[
 				"pro",
 				"protected"
 			],
@@ -64,10 +92,61 @@
 	"buffers":
 	[
 		{
+			"file": "src/auth/AuthenticationCenter.h",
+			"settings":
+			{
+				"buffer_size": 1747,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "CTcpConnection* CAuthenticationCenter::AllocConnection(boost::asio::io_service& io_service,CConnectionManager& manager)\n{\n	return new CACConnection(io_service,manager,*this,_request_parser);\n}\n\nvoid CAuthenticationCenter::PostErrorMessage(boost::shared_ptr<CTcpConnection> conn,\n		boost::asio::io_service::strand& strand,\n		const std::string& errmsg)\n{\n	strand.post(boost::bind(\n		&CAuthenticationCenter::ReplyErrorMessage,\n		this,conn,errmsg\n		));\n}\n\nvoid CAuthenticationCenter::ReplyErrorMessage(boost::shared_ptr<CTcpConnection> conn,\n	const std::string& errmsg)\n{\n	int len = errmsg.size();\n	boost::array<char,len+4> buffer;\n	*((short*)buffer.data()) = htons(AC_REPLY_ERROR);\n	*((short*)(buffer.data()+2)) = htons(len+4);\n	memcpy(buffer.data()+4,errmsg.c_str(),len);\n	conn->ReplySyncMessage(buffer.data(),len+4);\n}\n\n\nvoid CAuthenticationCenter::PostRandomTGT(boost::shared_ptr<CTcpConnection> conn,\n		boost::asio::io_service::strand& strand,\n		UserInfo &unode)\n{\n	strand.post(boost::bind(&CAuthenticationCenter::ProcessTGTMessage,this,conn,unode));\n}\n\nvoid CAuthenticationCenter::ProcessTGTMessage(boost::shared_ptr<CTcpConnection> conn,UserInfo &unode)\n{\n	unsigned int rand_value ;\n	rand_r(&rand_value);\n	char rand_str[20];\n	sprintf(rand_str,\"%d\",rand_value);\n	int  key_len = strlen(rand_str);\n\n	ReplySecretWithACMasterKey\n\n	char *secret_key = _crypt.DESEncrypt(rand_str,key_len,unode.password.c_str());\n\n	//AC_REPLY_SAC\n	key_len = strlen(secret_key);\n	boost::array<char,key_len+4> sac_buffer;\n	*((short*)sac_buffer.data()) = htons(AC_REPLY_SAC);\n	*((short*)(sac_buffer.data()+2)) = htons(key_len+4);\n	memcpy(sac_buffer.data(),secret_key,key_len);\n	conn->PostAsyncMessage(sac_buffer.data(),key_len+4);\n\n\n}",
+			"file": "src/auth/AuthenticationCenter.cpp",
+			"file_size": 1718,
+			"file_write_time": 130034053895142682,
+			"settings":
+			{
+				"buffer_size": 1709,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "common/TcpConnection.h",
+			"settings":
+			{
+				"buffer_size": 1763,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "common/TcpConnection.cpp",
+			"settings":
+			{
+				"buffer_size": 2499,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/auth/ACParser.h",
+			"settings":
+			{
+				"buffer_size": 748,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "src/auth/ACConnection.h",
 			"settings":
 			{
-				"buffer_size": 447,
+				"buffer_size": 900,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/auth/ACConnection.cpp",
+			"settings":
+			{
+				"buffer_size": 2164,
 				"line_ending": "Windows"
 			}
 		},
@@ -75,7 +154,15 @@
 			"file": "common/data_protocol.h",
 			"settings":
 			{
-				"buffer_size": 972,
+				"buffer_size": 1236,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "common/data_type.h",
+			"settings":
+			{
+				"buffer_size": 347,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,15 +170,7 @@
 			"file": "common/CEncryptAndDecrypt.h",
 			"settings":
 			{
-				"buffer_size": 393,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/auth/CAuthenticationCenter.h",
-			"settings":
-			{
-				"buffer_size": 226,
+				"buffer_size": 603,
 				"line_ending": "Windows"
 			}
 		}
@@ -99,7 +178,7 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 360.0,
+		"height": 392.0,
 		"selected_items":
 		[
 		],
@@ -120,25 +199,31 @@
 	},
 	"file_history":
 	[
+		"/E/Company/self/loginsystem/src/auth/UserTable.h",
+		"/E/Company/self/loginsystem/src/auth/ACParser.cpp",
+		"/E/Company/self/loginsystem/src/auth/AuthenticationCenter.cpp",
+		"/E/Company/self/loginsystem/TODO",
+		"/E/Company/self/loginsystem/common/TcpServer.cpp",
 		"/E/Company/self/loginsystem/common/TcpConnection.h",
+		"/E/Company/self/loginsystem/common/CEncryptAndDecrypt.h",
+		"/E/Company/self/loginsystem/common/RequestParser.h",
+		"/E/Company/self/loginsystem/common/data_protocol.h",
+		"/E/Company/self/loginsystem/src/auth/AuthenticationCenter.h",
+		"/E/Company/self/loginsystem/src/auth/ACParser.h",
+		"/E/Company/self/loginsystem/common/RequestParser.cpp",
+		"/E/Company/self/loginsystem/src/auth/CAuthenticationCenter.cpp",
 		"/E/Company/self/loginsystem/common/TcpConnection.cpp",
 		"/E/Company/self/loginsystem/common/EnAndDecryption.cpp",
-		"/E/Company/self/loginsystem/common/data_protocol.h",
-		"/E/Company/self/loginsystem/common/TcpServer.cpp",
 		"/E/Company/self/loginsystem/common/ConnectionManager.cpp",
 		"/E/Company/self/loginsystem/common/ConnectionManager.h",
 		"/E/Company/self/loginsystem/common/TcpServer.h",
 		"/E/Company/self/loginsystem/common/EnAndDecryption.h",
-		"/E/Company/self/loginsystem/common/RequestParser.h",
 		"/E/Company/self/loginsystem/src/auth/ACConnection.h",
 		"/E/Company/self/loginsystem/src/auth/ACConnection.cpp",
 		"/E/Company/self/loginsystem/src/auth/UserTable.cpp",
 		"/E/Company/self/loginsystem/src/auth/CAuthenticationCenter.h",
-		"/E/Company/self/loginsystem/src/auth/UserTable.h",
 		"/E/Company/self/loginsystem/common/data_type.h",
 		"/E/Company/self/loginsystem/README.md",
-		"/E/Company/self/loginsystem/TODO",
-		"/E/Company/self/loginsystem/common/RequestParser.cpp",
 		"/E/Company/self/loginsystem/common/TcpSession.h",
 		"/E/Company/self/loginsystem/common/CTcpConnection.cpp",
 		"/E/Company/self/loginsystem/common/CTcpConnection.h",
@@ -147,7 +232,6 @@
 		"/E/Company/self/loginsystem/common/CTcpServer.cpp",
 		"/E/Company/self/loginsystem/common/CEnAndDecryption.cpp",
 		"/E/Company/self/loginsystem/common/CEnAndDecryption.h",
-		"/E/Company/self/loginsystem/src/auth/CAuthenticationCenter.cpp",
 		"/E/Company/self/loginsystem/Makefile",
 		"/E/Company/self/loginsystem/README"
 	],
@@ -184,49 +268,50 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/auth/ACConnection.h",
+					"file": "src/auth/AuthenticationCenter.h",
 					"settings":
 					{
-						"buffer_size": 447,
+						"buffer_size": 1747,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								413,
-								413
+								1099,
+								1099
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "common/data_protocol.h",
+					"file": "src/auth/AuthenticationCenter.cpp",
 					"settings":
 					{
-						"buffer_size": 972,
+						"buffer_size": 1709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								187,
-								187
+								1297,
+								1297
 							]
 						],
 						"settings":
@@ -234,25 +319,79 @@
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "common/CEncryptAndDecrypt.h",
+					"file": "common/TcpConnection.h",
 					"settings":
 					{
-						"buffer_size": 393,
+						"buffer_size": 1763,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								183,
-								201
+								732,
+								748
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "common/TcpConnection.cpp",
+					"settings":
+					{
+						"buffer_size": 2499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2110,
+								2126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 990.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/auth/ACParser.h",
+					"settings":
+					{
+						"buffer_size": 748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								318,
+								305
 							]
 						],
 						"settings":
@@ -266,19 +405,125 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/auth/CAuthenticationCenter.h",
+					"buffer": 5,
+					"file": "src/auth/ACConnection.h",
 					"settings":
 					{
-						"buffer_size": 226,
+						"buffer_size": 900,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6,
-								6
+								107,
+								107
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/auth/ACConnection.cpp",
+					"settings":
+					{
+						"buffer_size": 2164,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38,
+								38
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "common/data_protocol.h",
+					"settings":
+					{
+						"buffer_size": 1236,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								789,
+								801
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "common/data_type.h",
+					"settings":
+					{
+						"buffer_size": 347,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								330,
+								338
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "common/CEncryptAndDecrypt.h",
+					"settings":
+					{
+						"buffer_size": 603,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								249
 							]
 						],
 						"settings":
@@ -335,6 +580,22 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"aut",
+				"src/auth/AuthenticationCenter.cpp"
+			],
+			[
+				"cry",
+				"common/CEncryptAndDecrypt.h"
+			],
+			[
+				"acpar",
+				"src/auth/ACParser.cpp"
+			],
+			[
+				"user",
+				"src/auth/UserTable.h"
+			]
 		],
 		"width": 0.0
 	},

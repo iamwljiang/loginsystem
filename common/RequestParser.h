@@ -1,8 +1,10 @@
 #ifndef LS_REQUESTPARSER_H_
 #define LS_REQUESTPARSER_H_
 
+#include <boost/shared_array.hpp>
+
 class CRequestParser{
-public:
+protected:
 	CRequestParser();
 	
 	virtual ~CRequestParser();
@@ -13,13 +15,26 @@ public:
 	@param 'packet' is content of packet
 	@param 'len' is packet length
 	@param 'type' is what's type of packet,see data_protocol.h 
+	@param 'plaintext' is content of parsed packet ,it will automatic free 
 	*/
 
-	virtual int ParseClientToACPacket(const char *packet,short len,short type);
+	//auth service rewrite this method
+	virtual int ParseClientToACPacket(const char *packet,short len,short type,boost::shared_array<char>* plaintext )
+	{
+		return 0;
+	}
 
-	virtual int ParseAcTOClientPacket(const char *packet,short len,short type);
+	//client service rewrite this method
+	virtual int ParseAcTOClientPacket(const char *packet,short len,short type,boost::shared_array<char>* plaintext)
+	{
+		return 0;
+	}
 
-	virtual int ParseClientTOServerPacket(const char *packet,short len,short type);
+	//server service rewrite this method
+	virtual int ParseClientTOServerPacket(const char *packet,short len,short type,boost::shared_array<char>* plaintext)
+	{
+		return 0;
+	}
 };
 
 #endif //LS_REQUESTPARSER_H_
